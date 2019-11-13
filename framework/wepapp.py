@@ -23,6 +23,7 @@ class WebApp:
             self.driver = webdriver.Chrome()
         else:
             self.driver = webdriver.Chrome()
+        self.driver.maximize_window()
 
     def get_driver(self):
         return self.driver
@@ -38,8 +39,8 @@ class WebApp:
         assert component in self.driver.find_element_by_tag_name('body').text, \
             "Component {} not found on page".format(component)
     
-    def wait_for_element(self, element):
-        wait = WebDriverWait(self.driver, 10)
+    def wait_for_element(self, element, time=10):
+        wait = WebDriverWait(self.driver, time)
         element = wait.until(EC.visibility_of_element_located(element))
         return element
 
